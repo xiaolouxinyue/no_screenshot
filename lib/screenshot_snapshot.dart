@@ -12,7 +12,7 @@ class ScreenshotSnapshot {
   factory ScreenshotSnapshot.fromMap(Map<String, dynamic> map) {
     return ScreenshotSnapshot(
       screenshotPath: map['screenshot_path'] as String? ?? '',
-      isScreenshotProtectionOn: map['is_screenshot_on'] as bool? ?? false,
+      isScreenshotProtectionOn: map['is_screenshot_protection_on'] as bool? ?? false,
       wasScreenshotTaken: map['was_screenshot_taken'] as bool? ?? false,
     );
   }
@@ -20,7 +20,7 @@ class ScreenshotSnapshot {
   Map<String, dynamic> toMap() {
     return {
       'screenshot_path': screenshotPath,
-      'is_screenshot_on': isScreenshotProtectionOn,
+      'is_screenshot_protection_on': isScreenshotProtectionOn,
       'was_screenshot_taken': wasScreenshotTaken,
     };
   }

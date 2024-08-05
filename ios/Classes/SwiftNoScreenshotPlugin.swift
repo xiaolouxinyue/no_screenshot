@@ -30,10 +30,6 @@ public class SwiftNoScreenshotPlugin: NSObject, FlutterPlugin, FlutterStreamHand
         registrar.addApplicationDelegate(instance)
     }
 
-    public func applicationWillResignActive(_ application: UIApplication) {
-        updateScreenshotState()
-    }
-
     public func applicationDidBecomeActive(_ application: UIApplication) {
         updateScreenshotState()
     }
@@ -41,12 +37,12 @@ public class SwiftNoScreenshotPlugin: NSObject, FlutterPlugin, FlutterStreamHand
     public func handle(_ call: FlutterMethodCall, result: @escaping FlutterResult) {
         switch call.method {
         case "screenshotOff":
-            SwiftNoScreenshotPlugin.preventScreenShot = false
+            SwiftNoScreenshotPlugin.preventScreenShot = true
             shotOff()
             updateSharedPreferencesState("")
             result(true)
         case "screenshotOn":
-            SwiftNoScreenshotPlugin.preventScreenShot = true
+            SwiftNoScreenshotPlugin.preventScreenShot = false
             shotOn()
             updateSharedPreferencesState("")
             result(true)
@@ -98,7 +94,7 @@ public class SwiftNoScreenshotPlugin: NSObject, FlutterPlugin, FlutterStreamHand
 
     private func updateSharedPreferencesState(_ screenshotData: String) {
         let map: [String: Any] = [
-            "is_screenshot_on": !SwiftNoScreenshotPlugin.preventScreenShot,
+            "is_screenshot_protection_on": SwiftNoScreenshotPlugin.preventScreenShot,
             "screenshot_path": screenshotData,
             "was_screenshot_taken": !screenshotData.isEmpty
         ]
